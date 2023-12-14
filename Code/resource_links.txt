@@ -1,0 +1,9 @@
+https://www.kaggle.com/datasets/calebstephen/food-images-and-labels-dataset-for-yolov5
+
+https://www.kaggle.com/datasets/sainikhileshreddy/food-recognition-2022/code
+
+https://github.com/lannguyen0910/food-recognition
+
+https://app.activeloop.ai/sainikhileshreddy/food-recognition-2022-val/firstdbf9474d461a19e9333c2fd19b46115348f
+https://docs.activeloop.ai/example-code/getting-started/deep-learning/creating-datasets-manually
+
