@@ -11,7 +11,8 @@
 import streamlit as st
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
-from palm import Palm
+# from palm import Palm
+from palm_module import Palm
 import cv2
 from tqdm import tqdm
 
