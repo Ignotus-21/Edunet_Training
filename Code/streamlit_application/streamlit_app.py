@@ -1,4 +1,3 @@
-
 import streamlit as st
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -44,7 +43,7 @@ def predict_food_item(image_bytes, pat, user_id, app_id, model_id, model_version
 # Streamlit application code
 
 
-st.title("Gastronomix AI: Culinary Insight Hub")
+st.title("Gastronomix AI: Culinary Insight Hub")
 
 
 
@@ -59,36 +58,47 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# page_bg_img = f"""
-# <style>
-# [data-testid="stAppViewContainer"] > .main {{
-# background-image: url("https://i.postimg.cc/Df66JRLg/logo-black.jpg");
-# background-size: cover;
-# background-position: center center;
-# background-repeat: no-repeat;
-# background-attachment: local;
-# }}
-# [data-testid="stHeader"] {{
-# background: rgba(0,0,0,0);
-# }}
-# </style>
-# """
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("https://i.postimg.cc/Df66JRLg/logo-black.jpg");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: local;
+}}
+[data-testid="stHeader"] {{
+background: rgba(0,0,0,0);
+}}
+</style>
+"""
 
-# st.markdown(page_bg_img, unsafe_allow_html=True)
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Sidebar option to choose between camera or upload
 option = st.sidebar.radio("Choose an option", ["Capture from Camera", "Upload Image"])
 
+
 # Function to capture image from camera
 def capture_from_camera():
     st.markdown("### Capture Image")
-    capture_button = st.button("Capture Image")
-    
-    if capture_button:
+    # capture_button = st.button("Capture Image", on_click=optional_camera_callback)
+    if st.toggle("Slide for Camera", value=False):
+        st.markdown("Camera opening")
         captured_image = st.camera_input("Captured Image")
         return captured_image
     else:
+        st.markdown("")
         return None
+  
+    
+
+
+    # if capture_button:
+        # captured_image = st.camera_input("Captured Image")
+        # return captured_image
+    # else:
+        # return None   
     # st.markdown("### Capture Image")
     # captured_image = st.camera_input("Capture Image")
     # return captured_image
@@ -108,6 +118,7 @@ def upload_image():
 
 # Choose capture method based on user option
 if option == "Capture from Camera":
+    #captured_image = capture_from_camera()
     captured_image = capture_from_camera()
 elif option == "Upload Image":
     uploaded_file = upload_image()
@@ -171,4 +182,3 @@ if st.sidebar.button("Generate Recipes"):
     # Display the generated content
     st.sidebar.markdown("### Recipe Suggestions:")
     st.sidebar.markdown(response.text)
-
