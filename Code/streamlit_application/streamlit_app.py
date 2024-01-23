@@ -170,7 +170,7 @@ def to_markdown(text):
   text = text.replace('•', '  *')
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
-GOOGLE_API_KEY='AIzaSyDJ4815fNqfkwvpp4m6qCXjmU9V8QoTaWw'
+GOOGLE_API_KEY='Your_API_KEY'
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Create a button to trigger recipe generation
