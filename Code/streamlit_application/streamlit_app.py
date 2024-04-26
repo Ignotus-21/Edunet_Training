@@ -6,6 +6,13 @@ from PIL import Image
 import textwrap
 import google.generativeai as genai
 from IPython.display import Markdown
+from dotenv import load_dotenv
+import os
+
+def configure():
+    load_dotenv()
+
+configure()
 
 def predict_food_item(image_bytes, pat, user_id, app_id, model_id, model_version_id):
     channel = ClarifaiChannel.get_grpc_channel()
@@ -170,8 +177,8 @@ def to_markdown(text):
   text = text.replace('•', '  *')
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
-GOOGLE_API_KEY='Your_API_KEY'
-genai.configure(api_key=GOOGLE_API_KEY)
+# GOOGLE_API_KEY='Goes-here'
+genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 
 # Create a button to trigger recipe generation
 if st.sidebar.button("Generate Recipes"):
