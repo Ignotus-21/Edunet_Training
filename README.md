@@ -54,6 +54,6 @@ Code/streamlit_application/
    ```
 
 ## Repository notes
-- `YOLO_V5_DATASET/` contains the dataset assets used elsewhere in the training repository.
+- `YOLO_V5_DATASET/` is a separate training dataset kept in this repository for related experimentation; the refreshed Streamlit app does not depend on it at runtime.
 - `Code/resource_links.txt` stores related project references.
 - The root `README.md` now focuses on the runnable Streamlit experience.

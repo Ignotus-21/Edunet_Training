@@ -14,7 +14,7 @@ APP_DIR = Path(__file__).resolve().parent
 BRANDING_DIR = APP_DIR / "assets" / "branding"
 MEDIA_DIR = APP_DIR / "assets" / "media"
 SIDEBAR_LOGO_PATH = BRANDING_DIR / "logo_white.jpg"
-DEFAULT_STORAGE_TIP = "Refrigerate fresh food quickly, label leftovers, and freeze anything you will not use within 2 to 3 days."
+DEFAULT_STORAGE_TIP = "Refrigerate fresh food quickly, label leftovers, and freeze unused food within 2 to 3 days."
 DEFAULT_WASTE_TIP = "Plan one flexible meal each week to use leftovers, soft vegetables, and herbs before they spoil."
 PLACEHOLDER_KEY_SNIPPETS = ("paste-your", "your-google-ai-api-key")
 PANTRY_STORAGE_GUIDE = {
@@ -312,7 +312,7 @@ with st.sidebar:
         st.info("Running in graceful fallback mode until a Google API key is added.")
 
     st.markdown("### Pantry quick add")
-    quick_add = st.text_input("Add items", placeholder="milk, spinach, rice")
+    quick_add = st.text_input("Add pantry items", placeholder="milk, spinach, rice")
     if st.button("Add to pantry", use_container_width=True):
         new_items = normalize_items(quick_add)
         if new_items:
@@ -359,7 +359,10 @@ food_tab, recipe_tab, pantry_tab = st.tabs(["Food Vision", "Recipe Studio", "Pan
 with food_tab:
     st.subheader("Recognize food from a photo")
     source = st.radio("Choose an image source", ["Upload image", "Use camera"], horizontal=True)
-    image_input = st.file_uploader("Upload a food image", type=["jpg", "jpeg", "png"]) if source == "Upload image" else st.camera_input("Take a food photo")
+    if source == "Upload image":
+        image_input = st.file_uploader("Upload a food image", type=["jpg", "jpeg", "png"])
+    else:
+        image_input = st.camera_input("Take a food photo")
 
     if st.button("Analyze image", type="primary"):
         if image_input is None:
