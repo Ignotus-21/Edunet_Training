@@ -3,3 +3,8 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 Code/streamlit_application/.streamlit/secrets.toml
+
+# Virtual Environments
+venv/
+.venv/
+env/

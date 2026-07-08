@@ -123,7 +123,7 @@ def get_model() -> tuple[Any | None, str | None]:
 
     try:
         genai.configure(api_key=api_key)
-        return genai.GenerativeModel("gemini-1.5-flash"), None
+        return genai.GenerativeModel("gemini-2.5-flash"), None
     except Exception as exc:  # pragma: no cover - network/service setup
         return None, f"Gemini setup failed: {exc}"
 
