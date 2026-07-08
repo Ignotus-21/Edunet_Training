@@ -15,6 +15,7 @@ BRANDING_DIR = APP_DIR / "assets" / "branding"
 MEDIA_DIR = APP_DIR / "assets" / "media"
 DEFAULT_STORAGE_TIP = "Refrigerate fresh food quickly, label leftovers, and freeze anything you will not use within 2 to 3 days."
 DEFAULT_WASTE_TIP = "Plan one flexible meal each week to use leftovers, soft vegetables, and herbs before they spoil."
+PLACEHOLDER_KEY_SNIPPETS = ("paste-your", "your-google-ai-api-key")
 PANTRY_STORAGE_GUIDE = {
     "tomato": ("Counter or fridge", "Use within 3-5 days", "Roast or blend into soup when very ripe."),
     "banana": ("Counter", "Use within 2-6 days", "Freeze slices for smoothies or pancakes."),
@@ -108,7 +109,7 @@ def get_secret(name: str) -> str:
 
 def get_model() -> tuple[Any | None, str | None]:
     api_key = get_secret("GOOGLE_API_KEY")
-    if not api_key or "paste-your" in api_key.lower():
+    if not is_configured_api_key(api_key):
         return None, "Add GOOGLE_API_KEY to /Code/streamlit_application/.streamlit/secrets.toml to enable live AI analysis."
 
     try:
@@ -138,6 +139,11 @@ def strip_code_fences(text: str) -> str:
     cleaned = re.sub(r"^```(?:json)?", "", cleaned).strip()
     cleaned = re.sub(r"```$", "", cleaned).strip()
     return cleaned
+
+
+def is_configured_api_key(api_key: str) -> bool:
+    lowered_key = api_key.lower()
+    return bool(api_key and not any(snippet in lowered_key for snippet in PLACEHOLDER_KEY_SNIPPETS))
 
 
 def parse_json_payload(text: str) -> dict[str, Any]:
@@ -297,7 +303,8 @@ with st.sidebar:
         st.image(str(BRANDING_DIR / "logo_white.jpg"), use_container_width=True)
 
     st.markdown("### App status")
-    if get_secret("GOOGLE_API_KEY") and "paste-your" not in get_secret("GOOGLE_API_KEY").lower():
+    configured_api_key = get_secret("GOOGLE_API_KEY")
+    if is_configured_api_key(configured_api_key):
         st.success("AI features are configured.")
     else:
         st.info("Running in graceful fallback mode until a Google API key is added.")

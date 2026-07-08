@@ -10,7 +10,7 @@ Modernized training repository featuring **Gastronomix AI**, a Streamlit applica
 - Updated project structure for the Streamlit app assets and configuration
 
 ## Streamlit application
-Location: `/home/runner/work/Edunet_Training/Edunet_Training/Code/streamlit_application`
+Location: `Code/streamlit_application`
 
 ### Features
 - Upload or capture food images for ingredient recognition
