@@ -43,7 +43,7 @@ Code/streamlit_application/
    ```bash
    pip install -r Code/streamlit_application/requirements.txt
    ```
-3. Add your Google AI Studio key to `Code/streamlit_application/.streamlit/secrets.toml` (create the `.streamlit` folder first if needed).
+3. Add your Google AI Studio key to `Code/streamlit_application/.streamlit/secrets.toml`.
    Example:
    ```toml
    GOOGLE_API_KEY = "your-google-ai-api-key"

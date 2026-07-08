@@ -352,7 +352,7 @@ with hero_right:
         unsafe_allow_html=True,
     )
 
-st.caption("Tip: add your Google AI API key to the Streamlit secrets file for live vision and recipe generation.")
+st.caption("Tip: Add your Google AI API key to the Streamlit secrets file for live vision and recipe generation.")
 
 food_tab, recipe_tab, pantry_tab = st.tabs(["Food Vision", "Recipe Studio", "Pantry Board"])
 
