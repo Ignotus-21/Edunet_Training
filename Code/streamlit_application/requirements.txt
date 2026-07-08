@@ -1,5 +1,3 @@
-altair
-pandas
-streamlit
-clarifai
-pip install google-generativeai
+streamlit>=1.36,<2.0
+google-generativeai>=0.7,<1.0
+Pillow>=10.0,<12.0
