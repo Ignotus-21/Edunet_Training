@@ -44,6 +44,10 @@ Code/streamlit_application/
    pip install -r Code/streamlit_application/requirements.txt
    ```
 3. Add your Google AI Studio key to `Code/streamlit_application/.streamlit/secrets.toml`.
+   Example:
+   ```toml
+   GOOGLE_API_KEY = "your-google-ai-api-key"
+   ```
 4. Start the app:
    ```bash
    streamlit run Code/streamlit_application/streamlit_app.py

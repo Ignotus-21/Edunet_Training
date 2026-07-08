@@ -13,6 +13,7 @@ import streamlit as st
 APP_DIR = Path(__file__).resolve().parent
 BRANDING_DIR = APP_DIR / "assets" / "branding"
 MEDIA_DIR = APP_DIR / "assets" / "media"
+SIDEBAR_LOGO_PATH = BRANDING_DIR / "logo_white.jpg"
 DEFAULT_STORAGE_TIP = "Refrigerate fresh food quickly, label leftovers, and freeze anything you will not use within 2 to 3 days."
 DEFAULT_WASTE_TIP = "Plan one flexible meal each week to use leftovers, soft vegetables, and herbs before they spoil."
 PLACEHOLDER_KEY_SNIPPETS = ("paste-your", "your-google-ai-api-key")
@@ -299,8 +300,8 @@ def render_badges(items: list[str]) -> None:
 
 
 with st.sidebar:
-    if (BRANDING_DIR / "logo_white.jpg").exists():
-        st.image(str(BRANDING_DIR / "logo_white.jpg"), use_container_width=True)
+    if SIDEBAR_LOGO_PATH.exists():
+        st.image(str(SIDEBAR_LOGO_PATH), use_container_width=True)
 
     st.markdown("### App status")
     configured_api_key = get_secret("GOOGLE_API_KEY")
