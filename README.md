@@ -48,6 +48,7 @@ Code/streamlit_application/
    ```toml
    GOOGLE_API_KEY = "your-google-ai-api-key"
    ```
+   `secrets.toml` is the preferred Streamlit setup. The app also accepts `GOOGLE_API_KEY` as a normal environment variable if you need a non-Streamlit fallback.
 4. Start the app:
    ```bash
    streamlit run Code/streamlit_application/streamlit_app.py

@@ -16,7 +16,15 @@ MEDIA_DIR = APP_DIR / "assets" / "media"
 SIDEBAR_LOGO_PATH = BRANDING_DIR / "logo_white.jpg"
 DEFAULT_STORAGE_TIP = "Refrigerate fresh food quickly, label leftovers, and freeze unused food within 2 to 3 days."
 DEFAULT_WASTE_TIP = "Plan one flexible meal each week to use leftovers, soft vegetables, and herbs before they spoil."
-PLACEHOLDER_KEY_SNIPPETS = ("paste-your", "your-google-ai-api-key")
+DEFAULT_STORAGE_ADVICE = ("Cool, dry place or fridge", "Use soon", DEFAULT_WASTE_TIP)
+PLACEHOLDER_KEY_SNIPPETS = (
+    "paste-your",
+    "your-google-ai-api-key",
+    "replace-me",
+    "insert-key-here",
+    "api-key-here",
+)
+CUISINE_OPTIONS = ["Global", "Indian", "Italian", "Asian", "Mediterranean", "Mexican"]
 PANTRY_STORAGE_GUIDE = {
     "tomato": ("Counter or fridge", "Use within 3-5 days", "Roast or blend into soup when very ripe."),
     "banana": ("Counter", "Use within 2-6 days", "Freeze slices for smoothies or pancakes."),
@@ -226,7 +234,7 @@ def analyze_food_image(image: Image.Image) -> tuple[dict[str, Any], str | None]:
 
 def build_fallback_recipe(ingredients: list[str], cuisine: str, goal: str, max_minutes: int) -> str:
     joined = ", ".join(ingredients) if ingredients else "your available pantry items"
-    style = FALLBACK_RECIPE_STYLES.get(goal, FALLBACK_RECIPE_STYLES["Quick"])
+    style = FALLBACK_RECIPE_STYLES.get(goal, "Build a flexible pantry meal with your ingredients and a simple sauce or seasoning base.")
     return f"""
 ## Pantry Recipe Starter
 
@@ -280,7 +288,7 @@ def add_to_pantry(items: list[str]) -> None:
 def pantry_table(items: list[str]) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     for item in items:
-        advice = PANTRY_STORAGE_GUIDE.get(item.lower(), ("Cool, dry place or fridge", "Use soon", DEFAULT_WASTE_TIP))
+        advice = PANTRY_STORAGE_GUIDE.get(item.lower(), DEFAULT_STORAGE_ADVICE)
         rows.append(
             {
                 "Item": item,
@@ -413,7 +421,7 @@ with recipe_tab:
     )
 
     recipe_col1, recipe_col2, recipe_col3 = st.columns(3)
-    cuisine = recipe_col1.selectbox("Cuisine", ["Global", "Indian", "Italian", "Asian", "Mediterranean", "Mexican"])
+    cuisine = recipe_col1.selectbox("Cuisine", CUISINE_OPTIONS)
     goal = recipe_col2.selectbox("Meal goal", ["Quick", "Healthy", "Comfort", "Snack"])
     max_minutes = recipe_col3.slider("Max time (minutes)", min_value=10, max_value=60, value=25, step=5)
 
