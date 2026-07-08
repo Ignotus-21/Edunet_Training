@@ -111,7 +111,7 @@ def get_secret(name: str) -> str:
 def get_model() -> tuple[Any | None, str | None]:
     api_key = get_secret("GOOGLE_API_KEY")
     if not is_configured_api_key(api_key):
-        return None, "Add GOOGLE_API_KEY to /Code/streamlit_application/.streamlit/secrets.toml to enable live AI analysis."
+        return None, "Add GOOGLE_API_KEY to .streamlit/secrets.toml to enable live AI analysis."
 
     try:
         genai.configure(api_key=api_key)
@@ -233,6 +233,7 @@ def build_fallback_recipe(ingredients: list[str], cuisine: str, goal: str, max_m
 **Style:** {goal} · **Cuisine:** {cuisine} · **Time:** ~{max_minutes} minutes
 
 Use **{joined}** as your base. {style}
+Keep the flavors aligned with a **{cuisine}** direction and aim to finish within **{max_minutes} minutes**.
 
 ### Suggested flow
 1. Prep the ingredients and group quick-cooking items together.
